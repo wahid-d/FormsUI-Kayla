@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="formsUI.Views.Cards"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <Style x:Key="header-icon" TargetType="Label">
+            <Setter Property="FontFamily" Value="fas"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="FontSize" Value="25"/>
+        </Style>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="auto, *">
+        <StackLayout BackgroundColor="Black"
+                     Orientation="Horizontal"
+                     Padding="30, 40, 30, 20">
+            <Label Text="&#xf053;" Style="{StaticResource header-icon}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Text="&#xf002;" Style="{StaticResource header-icon}"
+                   HorizontalOptions="EndAndExpand"/>
+        </StackLayout>
+
+        <StackLayout Grid.Row="1">
+            <StackLayout Orientation="Horizontal"
+                         Padding="25, 60, 25, 35">
+                <Label Text="My Cards" TextColor="Black"
+                       FontAttributes="Bold" FontSize="20"
+                       HorizontalOptions="StartAndExpand"/>
+                <Label Text="Deposits" HorizontalOptions="Center"/>
+                <Label Text="Transactions" HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+
+            <Frame BackgroundColor="Black" Margin="25, 0" Padding="30, 25, 30, 40"
+                   CornerRadius="30">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Current Balance" TextColor="White" FontSize="15"/>
+                        <Label Text="VISA" TextColor="White"
+                               HorizontalOptions="EndAndExpand" FontAttributes="Bold"
+                               FontSize="20"/>
+                    </StackLayout>
+
+
+                    <Label Text="$4,763.40" TextColor="White" FontSize="15"
+                           FontAttributes="Bold"/>
+                    <StackLayout Orientation="Horizontal" Margin="0, 50, 0, 0">
+                        <Label Text="*******0975" TextColor="White"
+                               FontSize="15"/>
+                        <Label Text="08/22" TextColor="White" HorizontalOptions="EndAndExpand"
+                               FontSize="15"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+
+            <StackLayout Orientation="Horizontal" Margin="25, 40, 25, 10">
+                <Label Text="Transactions" FontAttributes="Bold" FontSize="20"/>
+                <Label Text="Monthly Report" HorizontalOptions="EndAndExpand"
+                       FontSize="13"/>
+            </StackLayout>
+
+            <Label Text="Transactions received in current month" Margin="25, 0"
+                   FontSize="15"/>
+            <Label Text="Received from" FontSize="15" FontAttributes="Bold"
+                   Margin="25, 50, 25, 15"/>
+            <StackLayout Orientation="Horizontal" Margin="25, 0" Spacing="30">
+                <Label FontFamily="fas" Text="&#xf507;" FontSize="60"/>
+                <Label FontFamily="fas" Text="&#xf21b;" FontSize="60"/>
+                <Label FontFamily="fas" Text="&#xf501;" FontSize="60"/>
+                <Label FontFamily="fas" Text="&#xf504;" FontSize="60"/>
+            </StackLayout>
+
+            <Label Text="See all Transactions" FontAttributes="Bold"
+                   HorizontalOptions="Center" Margin="45" FontSize="20"
+                   VerticalOptions="EndAndExpand"/>
+        </StackLayout>
+    </Grid>
+</ContentPage>

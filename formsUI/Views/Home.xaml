@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="formsUI.Views.Home"
+             xmlns:controls="clr-namespace:formsUI.Controls"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:converters="clr-namespace:formsUI.Converters">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="header-icon" TargetType="Label">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontFamily" Value="fas"/>
+                <Setter Property="FontSize" Value="30"/>
+            </Style>
+            <Style x:Key="tab-icon" TargetType="Label" BasedOn="{StaticResource header-icon}">
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="Padding" Value="10"/>
+            </Style>
+            <Style x:Key="header-text" TargetType="Label">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Padding" Value="30, 20, 30, 10"/>
+            </Style>
+            <Style x:Key="header-frame" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="20"/>
+                <Setter Property="Margin" Value="30, 10"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="BackgroundColor" Value="#11000000"/>
+                <Setter Property="Padding" Value="0"/>
+            </Style>
+            <Style x:Key="header-icon-frame" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="#11000000"/>
+                <Setter Property="CornerRadius" Value="20"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="HeightRequest" Value="50"/>
+                <Setter Property="WidthRequest" Value="50"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+
+            </Style>
+            <Style x:Key="header-label" TargetType="Label">
+                <Setter Property="FontFamily" Value="fas"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="header-text-label" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="Margin" Value="10, 5, 10, 0"/>
+            </Style>
+
+            <converters:TransactionToIconConverter x:Key="transaction-to-icon"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="auto, *, auto">
+        <StackLayout BackgroundColor="Black"
+                     Orientation="Horizontal"
+                     Padding="30, 40, 30, 20">
+            <Label Text="&#xf1b3;"
+                   Style="{StaticResource header-icon}"/>
+            <Label Text="&#xf142;"
+                   Style="{StaticResource header-icon}"
+                   HorizontalOptions="EndAndExpand"/>
+        </StackLayout>
+        <StackLayout Grid.Row="1">
+            <StackLayout>
+                <Label Text="Welcome Back!"
+                       FontSize="20" Padding="30, 20, 30, 5"
+                       TextColor="Black"/>
+                <Frame Style="{StaticResource header-frame}">
+                    <StackLayout Orientation="Horizontal" Padding="15, 10">
+                        <Label FontFamily="fas" Text="&#xf002;" FontSize="{x:OnPlatform Android=24, iOS=20}" VerticalTextAlignment="Center"/>
+                        <controls:BorderlessEntry Placeholder="Search" FontSize="20"  HorizontalOptions="FillAndExpand"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+
+            <StackLayout>
+                <Label Text="Hira R."
+                       FontSize="20" Padding="30, 20, 0, 0"
+                       TextColor="Black"/>
+                <Label Text="$4,763.40" FontSize="25"
+                       Padding="30,0" FontAttributes="Bold"
+                       TextColor="Black"/>
+                <Label Text="Available Balance" FontSize="15"
+                       Padding="30,0" TextColor="Black"/>
+            </StackLayout>
+
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Overview" FontSize="25"
+                       Padding="30, 30, 0, 0" FontAttributes="Bold"
+                           TextColor="Black"/>
+                    <Label Text="&#xf0f3;" FontFamily="fas"
+                           Padding="5, 30, 0, 0" FontSize="23"
+                           TextColor="Black"/>
+                    <Label Text="Nov 26, 2020" FontSize="15"
+                           HorizontalOptions="EndAndExpand"
+                           Padding="0, 40, 30, 0"
+                           TextColor="Black"/>
+                </StackLayout>
+
+                <CollectionView x:Name="transactions">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal" Margin="30, 20, 10, 10">
+                                    <Frame Style="{StaticResource header-icon-frame}">
+                                        <Label Text="{Binding Type, Converter={StaticResource transaction-to-icon}}" Style="{StaticResource header-label}"/>
+                                    </Frame>
+                                    <StackLayout Orientation="Vertical">
+                                        <Label Text="{Binding Type}" Style="{StaticResource header-text-label}"/>
+                                        <Label Text="{Binding Note}" LineBreakMode="TailTruncation"
+                                        Margin="10, 0" FontSize="13"/>
+                                    </StackLayout>
+                                    <Label Text="{Binding Amount, StringFormat='{0:C0}'}" Style="{StaticResource header-text-label}"
+                                        HorizontalOptions="EndAndExpand"
+                                        Padding="0, 0, 10, 0"/>
+                                </StackLayout>
+
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </StackLayout>
+        <Grid Grid.Row="2" BackgroundColor="Black"
+              Padding="20, 10, 30, 20">
+            <Label Text="&#xf2bd;"
+                   Style="{StaticResource tab-icon}"/>
+            <Label Text="&#xf09d;" Grid.Column="1" 
+                   Style="{StaticResource tab-icon}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Text="&#xf155;" Grid.Column="2"
+                   Style="{StaticResource tab-icon}"/>
+            <Label Text="&#xf055;" Grid.Column="3"
+                   Style="{StaticResource tab-icon}"/>
+        </Grid>
+    </Grid>
+</ContentPage>
